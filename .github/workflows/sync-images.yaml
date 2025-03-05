@@ -1,0 +1,27 @@
+name: Sync from DockerHub to GHCR
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0,6,12,18 * * *'
+
+jobs:
+  sync-images:
+    name: Sync tagged images from DockerHub to GHCR
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Install regctl
+        uses: regclient/actions/regctl-installer@main
+      - name: Sync images
+        uses: it-bens/container-registry-sync-action@bac5a22491246776cc99bb10adb3ca9847725747 # v0.4.0
+        with:
+          sourceRepository: 'dockware/proxy'
+          loginToSourceRepository: 'true'
+          sourceRepositoryUsername: ${{ secrets.DOCKERHUB_USERNAME }}
+          sourceRepositoryPassword: ${{ secrets.DOCKERHUB_TOKEN }}
+          targetRepository: 'ghcr.io/dockware-mirror/proxy'
+          loginToTargetRepository: 'true'
+          targetRepositoryUsername: ${{ github.actor }}
+          targetRepositoryPassword: ${{ secrets.GITHUB_TOKEN }}
+          tags: '*'
+          regClientConcurrency: 2
