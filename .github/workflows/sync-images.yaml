@@ -10,10 +10,8 @@ jobs:
     name: Sync tagged images from DockerHub to GHCR
     runs-on: ubuntu-24.04
     steps:
-      - name: Install regctl
-        uses: regclient/actions/regctl-installer@main
       - name: Sync images
-        uses: it-bens/container-registry-sync-action@bac5a22491246776cc99bb10adb3ca9847725747 # v0.4.0
+        uses: it-bens/container-registry-sync-action@2868df2645b2b4d0a84d3393c3c5066b2c5b6931 # v0.5.1
         with:
           sourceRepository: 'dockware/proxy'
           loginToSourceRepository: 'true'
