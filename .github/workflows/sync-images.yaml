@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Sync images
-        uses: it-bens/container-registry-sync-action@2868df2645b2b4d0a84d3393c3c5066b2c5b6931 # v0.5.1
+        uses: it-bens/container-registry-sync-action@967ee51e4a5938df277b2027e1f2d9d143b334a4 # v1.0.0
         with:
           sourceRepository: 'dockware/proxy'
           loginToSourceRepository: 'true'
